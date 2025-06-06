@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Blog</title>
+  <style>
+    /* CSS for all pages (inline for simplicity) */
+    body { font-family: Arial; margin: 0; }
+    .page { display: none; padding: 20px; } /* Hide all pages by default */
+    .active { display: block; } /* Show active page */
+    nav { background: #333; padding: 10px; }
+    nav a { color: white; margin: 0 10px; text-decoration: none; }
+    @media (max-width: 600px) { nav { text-align: center; } }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <a href="#" onclick="showPage('home')">Home</a>
+    <a href="#" onclick="showPage('about')">About</a>
+    <a href="#" onclick="showPage('articles')">Articles</a>
+    <a href="#" onclick="showPage('contact')">Contact</a>
+    <button onclick="toggleDarkMode()">Dark Mode</button>
+  </nav>
+
+  <!-- Pages (hidden/shown via JS) -->
+  <div id="home" class="page active">
+    <h1>Welcome to My Blog!</h1>
+    <p>Latest post: <a href="#" onclick="showPage('articles')">CSS Grid Tips</a></p>
+  </div>
+
+  <div id="about" class="page">
+    <h1>About Me</h1>
+    <p>I write about web development...</p>
+  </div>
+
+  <div id="articles" class="page">
+    <h1>Articles</h1>
+    <article>
+      <h2>CSS Grid Tips</h2>
+      <p>Learn how to master layouts...</p>
+    </article>
+  </div>
+
+  <div id="contact" class="page">
+    <h1>Contact</h1>
+    <form onsubmit="validateForm(event)">
+      <input type="email" id="email" placeholder="Your email" required>
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <script>
+    // JavaScript to handle page switching
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+      });
+      document.getElementById(pageId).classList.add('active');
+    }
+
+    // Dark Mode Toggle
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-theme');
+    }
+
+    // Form Validation
+    function validateForm(event) {
+      const email = document.getElementById('email').value;
+      if (!email.includes('@')) {
+        event.preventDefault();
+        alert('Invalid email!');
+      }
+    }
+  </script>
+</body>
+</html>
